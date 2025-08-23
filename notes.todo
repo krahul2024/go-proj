@@ -1,0 +1,39 @@
+1. Serve static files (images, audio, video).
+    * Support HTTP Range requests (clients can request partial content, e.g. start at byte 5000).
+    * HTTP headers (Range, Content-Range, Content-Length).
+    * File I/O streaming (io.Copy, bufio.Reader).
+    * Resource management (don’t load whole files in memory).
+    * Basic logging/metrics.
+
+2: gRPC File Streaming
+    * Create a gRPC service with a stream endpoint.
+    * Server sends file in chunks, client reassembles.
+    * gRPC streaming (unary vs server-stream vs client-stream vs bidirectional).
+    * HTTP/2 framing.
+    * Backpressure handling (streaming vs batch).
+    * Comparing gRPC vs HTTP file serving.
+
+3: Chunked Video Streaming (Mini YouTube)
+    * Split video into small chunks (e.g. .ts files in HLS style).
+    * Client fetches chunks in sequence and plays while downloading.
+    * Progressive streaming vs adaptive bitrate streaming.
+    * Client buffering strategies.
+    * Why CDNs use chunk-based delivery.
+    * Tradeoffs between large vs small chunk sizes.
+
+4: Load Balancer + CDN Simulation
+    * Add your earlier load balancer in front of multiple file servers.
+    * Add simple caching (keep recently requested chunks in memory).
+    * Horizontal scaling.
+    * Cache hit/miss and eviction strategies (LRU, LFU).
+    * Observability: request per backend, latency.
+    * Real-world architecture of Netflix/YouTube CDNs.
+
+5: Real-Time Streaming (Twitch/Zoom Style)
+    * Stream audio/video in real-time using:
+    * WebSockets (simpler to start).
+    * gRPC bidirectional streaming (HTTP/2-based).
+    * Latency vs throughput tradeoffs.
+    * Backpressure + dropped frames.
+    * Live streaming protocols (WebRTC, RTMP, QUIC basics).
+    * Why video conferencing is harder than video-on-demand.
